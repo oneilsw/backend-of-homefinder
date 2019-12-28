@@ -1,36 +1,42 @@
 class ApartmentListingsController < ApplicationController
     def index
-        listings = Listings.all
-        render json: listings 
+        apartment_listings = ApartmentListing.all
+        render json: apartment_listings 
     end 
 
     def show 
-        listing = Listing.find(params[:id])
-        render json: listing
+        apartment_listing = ApartmentListing.find(params[:id])
+        render json: apartment_listing
     end 
 
     def create
-        listing = Listing.create(listing_params)
-        if listing.valid?
-            render json: listing
+        apartment_listing = ApartmentListing.create(apartment_listing_params)
+        if apartment_listing.valid?
+            render json: apartment_listing
         else
-            render json: {errors: listing.errors}
+            render json: {errors: apartment_listing.errors}
         end
     end 
 
     def update
-        listing = Listing.find(params[:id])
-        listing.update(listing_params)
-        if listing.valid?
-            render json: listing
+        apartment_listing = ApartmentListing.find(params[:id])
+        apartment_listing.update(apartment_listing_params)
+        if apartment_listing.valid?
+            render json: apartment_listing
         else
-            render json: {errors: listing.errors}
+            render json: {errors: apartment_listing.errors}
         end
+    end 
+
+    def agent_listings
+        agent = Agent.find(params[:id])
+        listings = agent.apartment_listings
+        render json: listings
     end 
 
     private
 
-    def listing_params
+    def apartment_listing_params
         params.permit(:number, :price, :lease_length, :broker_fee, :availability_date, :available_status, :bedroom_count, :bathroom_count, :image, :rating_avg, :building_id, :agent_id)
     end 
 end

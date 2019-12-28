@@ -5,7 +5,7 @@ class CreateOpenHouses < ActiveRecord::Migration[6.0]
       t.date :date
       t.time :time
 
-      t.belongs_to :listing
+      t.belongs_to :apartment_listing
 
       t.timestamps
     end

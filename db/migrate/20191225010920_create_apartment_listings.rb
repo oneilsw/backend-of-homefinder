@@ -9,6 +9,8 @@ class CreateApartmentListings < ActiveRecord::Migration[6.0]
       t.integer :bedroom_count
       t.integer :bathroom_count
       t.date :availability_date
+      t.text :summary
+      t.text :image
 
       t.belongs_to :building
       t.belongs_to :agent

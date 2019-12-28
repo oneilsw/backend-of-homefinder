@@ -12,7 +12,7 @@ class TenantsController < ApplicationController
     def create 
         tenant = Tenant.create(tenant_params)
         if tenant.valid?
-            render json: {token: token(tenant.id), tenant_id: tenant.id}
+            render json: tenant
         else
             render json: {error: tenant.errors.full_messages}, status: :unprocessable_entity
         end
@@ -31,6 +31,6 @@ class TenantsController < ApplicationController
     private
 
     def tenant_params
-        params.permit(:first_name, :last_name, :email, :password, :move_in_date, :budget, :phone)
+        params.permit(:first_name, :last_name, :move_in_date, :budget, :phone)
     end 
 end

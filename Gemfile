@@ -43,4 +43,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'faker'
 gem "jwt", "~> 2.2"
-gem "dotenv-rails", groups: [:development, :test]
+gem 'pgreset'
+gem 'rest-client'
+
+group :development, :test do 
+  gem 'dotenv-rails'
+  gem 'rspec-rails'
+end

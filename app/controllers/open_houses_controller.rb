@@ -5,7 +5,7 @@ class OpenHousesController < ApplicationController
     end 
 
     def show 
-        open_house = open_house.find(params[:id])
+        open_house = OpenHouse.find(params[:id])
         render json: open_house
     end 
 
@@ -26,11 +26,17 @@ class OpenHousesController < ApplicationController
         else
             render json: {errors: open_house.errors}
         end
-    end 
+    end  
+
+    def listing_open_houses
+        listing = ApartmentListing.find(params[:id])
+        open_houses = listing.open_houses
+        render json: open_houses
+    end
 
     private
 
     def open_house_params
-        params.permit(:date, :time, :details, :listing_id)
+        params.permit(:date, :time, :details, :apartment_listing_id)
     end
 end

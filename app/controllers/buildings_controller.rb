@@ -24,7 +24,7 @@ class BuildingsController < ApplicationController
         if building.valid?
             render json: building
         else
-            render json: {"This Update Did Not Work"}
+            render json: {errors: "This Update Did Not Work"}
         end
     end 
 

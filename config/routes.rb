@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :neighborhoods
   resources :accounts
   resources :agents
+  resources :login
   resources :tenants
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get "/apartment_listings/:id/open_houses", to: "open_houses#listing_open_houses"
+
+  get "/agents/:id/listings", to: "apartment_listings#agent_listings" 
 end

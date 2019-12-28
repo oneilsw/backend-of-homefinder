@@ -1,4 +1,4 @@
 class Neighborhood < ApplicationRecord
     has_many :buildings
-    has_many :listings, through: :buildings
+    has_many :apartment_listings, through: :buildings
 end

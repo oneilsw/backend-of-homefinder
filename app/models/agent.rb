@@ -1,11 +1,11 @@
 class Agent < ApplicationRecord
     has_one :account, as: :user, dependent: :destroy
 
-    has_many :listings, dependent: :destroy
+    has_many :apartment_listings, dependent: :destroy
 
-    has_many :open_houses, through: :listings
+    has_many :open_houses, through: :apartment_listings
 
-    has_many :viewings, through: :listings
+    has_many :viewings, through: :apartment_listings
     has_many :viewing_tenants, through: :viewings, source: :tenants
 
     has_many :agent_reviews

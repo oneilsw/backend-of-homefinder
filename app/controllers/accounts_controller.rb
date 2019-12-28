@@ -31,10 +31,10 @@ class AccountsController < ApplicationController
      private
   
      def account_params
-        params.permit(:email, :password, :password_confirmation, :user_id, :user_type)
+        params.permit(:email, :password, :user_type, :user_id)
      end 
   
      def update_account_params
-        params.permit(:password, :password_confirmation)
+        params.permit(:password)
      end 
 end
