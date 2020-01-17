@@ -3,6 +3,7 @@ class CreateViewings < ActiveRecord::Migration[6.0]
     create_table :viewings do |t|
       t.date :date
       t.time :time
+      t.string :note
       t.boolean :confirmed
 
       t.belongs_to :apartment_listing

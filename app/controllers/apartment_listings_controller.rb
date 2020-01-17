@@ -37,6 +37,6 @@ class ApartmentListingsController < ApplicationController
     private
 
     def apartment_listing_params
-        params.permit(:number, :price, :lease_length, :broker_fee, :availability_date, :available_status, :bedroom_count, :bathroom_count, :image, :rating_avg, :building_id, :agent_id)
+        params.permit(:apartment, :rent, :lease_length, :broker_fee, :availability_date, :available, :bedroom_count, :bathroom_count, :image, :summary, :building_id, :agent_id)
     end 
 end

@@ -20,4 +20,16 @@ class Agent < ApplicationRecord
     def full_name
         self.first_name.capitalize + " " + self.last_name.capitalize 
     end 
+
+    def showings
+        self.viewings
+    end 
+
+    def pending_showings
+        self.showings.select do |s|
+            !s.confirmed
+        end 
+    end 
+
+     
 end

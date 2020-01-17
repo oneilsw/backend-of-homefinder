@@ -3,7 +3,6 @@ class ApartmentListing < ApplicationRecord
 
     belongs_to :agent
     belongs_to :building
-    # has_one :neighbohood, through: :building
 
     has_many :viewings, dependent: :destroy
     has_many :tenants_who_viewed, through: :viewings, source: :tenants
@@ -12,6 +11,15 @@ class ApartmentListing < ApplicationRecord
     has_many :tenants_who_reviewed, through: :listing_reviews, source: :tenants
 
     has_many :open_houses, dependent: :destroy
+
+    has_many :pictures
+
+    validates :apartment, presence: true
+    validates :broker_fee, presence: true
+    validates :rent, presence: true
+    validates :availability_date, presence: true
+    validates :bedroom_count, presence: true
+    validates :bathroom_count, presence: true 
 
     def rent_text
         number_to_currency(self.rent) + "/month"
@@ -28,4 +36,8 @@ class ApartmentListing < ApplicationRecord
     def neighborhood
         self.building.neighborhood
     end 
+
+    def agent_name
+        self.agent.full_name
+    end
 end

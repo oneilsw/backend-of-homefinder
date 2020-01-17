@@ -34,6 +34,12 @@ class OpenHousesController < ApplicationController
         render json: open_houses
     end
 
+    def agent_open_houses
+        agent = Agent.find(params[:id])
+        open_houses = agent.open_houses
+        render json: open_houses
+    end 
+
     private
 
     def open_house_params

@@ -13,4 +13,8 @@ class OpenHouse < ApplicationRecord
     def time_text
         self.time.strftime("%I:%M %p")
     end 
+
+    def address
+        self.apartment_listing.building.address + " - " + self.apartment_listing.apartment
+    end 
 end

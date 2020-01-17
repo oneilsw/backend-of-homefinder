@@ -10,7 +10,7 @@ class CreateApartmentListings < ActiveRecord::Migration[6.0]
       t.integer :bathroom_count
       t.date :availability_date
       t.text :summary
-      t.text :image
+      t.text :image, array: true, default: []
 
       t.belongs_to :building
       t.belongs_to :agent

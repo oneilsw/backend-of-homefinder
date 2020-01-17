@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_25_012013) do
+ActiveRecord::Schema.define(version: 2020_01_17_200019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 2019_12_25_012013) do
     t.index ["building_id"], name: "index_apartment_listings_on_building_id"
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string "source"
+    t.string "author"
+    t.string "title"
+    t.string "description"
+    t.string "url"
+    t.string "image"
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "buildings", force: :cascade do |t|
     t.string "address"
     t.integer "year_built"
@@ -92,9 +104,24 @@ ActiveRecord::Schema.define(version: 2019_12_25_012013) do
     t.index ["tenant_id"], name: "index_listing_reviews_on_tenant_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "text"
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "neighborhoods", force: :cascade do |t|
     t.string "name"
     t.string "detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -109,6 +136,14 @@ ActiveRecord::Schema.define(version: 2019_12_25_012013) do
     t.index ["apartment_listing_id"], name: "index_open_houses_on_apartment_listing_id"
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.string "url"
+    t.bigint "apartment_listing_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["apartment_listing_id"], name: "index_pictures_on_apartment_listing_id"
+  end
+
   create_table "tenants", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -120,9 +155,17 @@ ActiveRecord::Schema.define(version: 2019_12_25_012013) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "viewings", force: :cascade do |t|
     t.date "date"
     t.time "time"
+    t.string "note"
     t.boolean "confirmed"
     t.bigint "apartment_listing_id"
     t.bigint "tenant_id"
@@ -132,4 +175,5 @@ ActiveRecord::Schema.define(version: 2019_12_25_012013) do
     t.index ["tenant_id"], name: "index_viewings_on_tenant_id"
   end
 
+  add_foreign_key "pictures", "apartment_listings"
 end
